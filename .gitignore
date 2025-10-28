@@ -1,0 +1,24 @@
+# Dependencies
+node_modules/
+
+# Build artifacts
+images/
+alpine-rootfs.tar
+alpine-fs.json
+alpine-rootfs-flat/
+alpine-state.bin
+
+# Logs
+*.log
+npm-debug.log*
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db

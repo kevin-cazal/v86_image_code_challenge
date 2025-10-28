@@ -1,0 +1,23 @@
+{
+  "name": "v86-alpine-image-builder",
+  "version": "1.0.0",
+  "description": "Build Alpine Linux images for V86 emulator",
+  "type": "module",
+  "scripts": {
+    "build": "node tools/build-state.js"
+  },
+  "keywords": [
+    "v86",
+    "alpine",
+    "emulator",
+    "docker"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "v86": "^0.5.262"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
