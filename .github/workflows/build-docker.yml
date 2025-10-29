@@ -142,3 +142,33 @@ jobs:
         name: v86-images-${{ env.COMMIT_HASH }}
         path: images
         retention-days: 30
+    
+    - name: Create zip archive of images
+      if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master')
+      run: |
+        cd images
+        zip -r ../v86-images.zip .
+        cd ..
+        ls -lh v86-images.zip
+    
+    - name: Create release and upload images (on push to main/master only)
+      if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master')
+      uses: softprops/action-gh-release@v1
+      with:
+        tag_name: v86-images-${{ env.COMMIT_HASH }}
+        name: V86 Images ${{ env.COMMIT_HASH }}
+        body: |
+          V86 images built from commit ${{ github.sha }}
+          
+          This release contains:
+          - alpine-fs.json
+          - alpine-state.bin
+          - alpine-rootfs.tar
+          - alpine-rootfs-flat/
+          
+          Download v86-images.zip and extract to your public/images directory.
+        files: v86-images.zip
+        draft: false
+        prerelease: false
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
