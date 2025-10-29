@@ -22,14 +22,8 @@ jobs:
     
     - name: Prepare submodule for Docker build
       run: |
-        # Copy submodule contents into a regular directory so Docker can include them
-        cp -r rootfs_overlay/opt/detect-language /tmp/detect-language-backup || true
-        if [ -d /tmp/detect-language-backup ]; then
-          rm -rf rootfs_overlay/opt/detect-language/*
-          cp -r /tmp/detect-language-backup/* rootfs_overlay/opt/detect-language/
-          rm -rf /tmp/detect-language-backup
-          rm -f rootfs_overlay/opt/detect-language/.git
-        fi
+        # Remove .git file from submodule so Docker includes the actual files
+        rm -f rootfs_overlay/opt/detect-language/.git
     
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v3
