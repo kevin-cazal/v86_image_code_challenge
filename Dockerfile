@@ -8,7 +8,7 @@ ENV KERNEL=virt
 
 # coreutils-doc is needed to have the man pages of command like `ls`, `cat`, `cp`, etc. (altough busybox is installed instead of coreutils)
 # Possible fix in the future: switch to coreutils instead of busybox, but it will increase the image size
-ENV ADDPKGS="python3 gcc musl-dev make docs micro busybox-extras e2fsprogs coreutils-doc bash musl musl-utils musl-locales tzdata lang kbd-bkeymaps"
+ENV ADDPKGS="python3 bats-core gcc musl-dev make docs micro busybox-extras e2fsprogs coreutils-doc bash musl musl-utils musl-locales tzdata lang kbd-bkeymaps"
 
 ADD rootfs_overlay/ /
 
