@@ -40,7 +40,7 @@ rm -f rootfs_overlay/opt/detect-language/.git
 
 # Step 2: Build Docker image
 echo -e "${YELLOW}Building Docker image (this may take a while)...${NC}"
-docker build --platform linux/386 -t "$IMAGE_TAG" . --load
+docker build --platform linux/386 -t "$IMAGE_TAG" .
 
 echo -e "${GREEN}✓ Docker image built${NC}"
 echo ""
