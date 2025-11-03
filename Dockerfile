@@ -14,15 +14,19 @@ ADD rootfs_overlay/ /
 
 RUN apk add --no-cache openrc alpine-base agetty alpine-conf linux-$KERNEL linux-firmware-none $ADDPKGS
 
+# Ensure all scripts are executable
+RUN chmod +x /opt/detect-language/*.sh /opt/detect-language/*.bash 2>/dev/null || true
+
 
 #RUN sed -i 's/getty 38400 tty1/agetty --autologin root tty1 linux/' /etc/inittab
-RUN echo 'ttyS0::respawn:/sbin/agetty --autologin root -s ttyS0 115200 vt100' >> /etc/inittab
+RUN echo 'ttyS0::respawn:/sbin/agetty --autologin root -s ttyS0 115200 dumb' >> /etc/inittab
 RUN sed 's@tty1::respawn:/sbin/getty 38400 tty1@@g' -i /etc/inittab
 RUN echo 'tty1::respawn:/sbin/agetty --autologin root -s tty1 38400 tty1' >> /etc/inittab
 
 #RUN echo 'tty1::respawn:/sbin/agetty -n -l /bin/autologin tty1 linux' >> /etc/inittab
 RUN echo "root:toor" | chpasswd
 
+RUN echo "export PS1='#READY > '" >> /etc/profile
 
 RUN setup-keymap fr fr
 

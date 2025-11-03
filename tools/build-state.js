@@ -44,7 +44,7 @@ emulator.add_listener("serial0-output-byte", function(byte)
 
     serial_text += c;
 
-    if(!booted && serial_text.endsWith("localhost:~# "))
+    if(!booted && serial_text.endsWith("#READY > "))
     {
         booted = true;
 
